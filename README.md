@@ -1,4 +1,3 @@
-### serv_launcher
-## Minecraft Server Launcher(Retry)
-A Minecraft Launcher
-I will retry this!
+# Minecraft 服务器启动器
+## 介绍
+Hi!我是M_BrownSweet25,我在试图用C++写一个服务器启动器`(因我不擅长java)`
