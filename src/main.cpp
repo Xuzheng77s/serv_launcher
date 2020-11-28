@@ -1,5 +1,4 @@
 #include <iostream>
-#include <assert>
 #include <cstdlib>
 #include "defs.hpp"
 using namespace std;
