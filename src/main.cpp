@@ -10,7 +10,7 @@ int main(int argc, char const *argv[])
   cutline();
   int choose;
   const char* src="./start.sh";
-  cout<<"请选择要做的事情:(1)启动服务器,(2)退出,(3)回滚纠错"<<endl;
+  cout<<"请选择要做的事情:(1)启动服务器,(2)退出,(3)备份,(4)回滚纠错"<<endl;
   cin>>choose
   switch (choose)
   {
@@ -20,6 +20,10 @@ int main(int argc, char const *argv[])
 
     case 2:
     return EXIT_SUCCESFUL;
+    break;
+
+    case 3:
+    
   }
   return EXIT_SUCCESFUL;
 }

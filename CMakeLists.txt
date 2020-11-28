@@ -7,6 +7,7 @@ endif()
 
 project(serv_launcher VERSION 0.1
                       DESCRIPTION "Minecraft server launcher")
-
+link_libraries(${PROJECT_SOURCE_DIR}/lib)
 aux_source_directory(src SRCS)
 add_executable(launcher ${SRCS})
+target_link_libraries(launcher liblzma.a)
