@@ -17,7 +17,7 @@ PST_BEGIN
     cout << "-------------------------------------" << endl;
   }
 
-  int start server(const char* script_src)
+  int start_server(const char* script_src)
   {
     int exit_code=system(script_src);
     if(exit_code==0)
@@ -48,6 +48,7 @@ PST_BEGIN
         return exit_code;
       }
     }
+    return EXIT_UNEXPECTED;
   }
 PST_END
 
