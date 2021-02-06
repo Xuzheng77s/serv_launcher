@@ -45,5 +45,11 @@ int main(int argc, char const *argv[])
     title("BACKUP");
     cout<<"Backup-ing"<<endl;
     backups();
+    title("BACKUP");
+    cout<<"Backup sucessful!"<<endl;
+    return EXIT_SUCCESFUL;
+
+    default:
+    return EXIT_FAILURE;
   }
 }
