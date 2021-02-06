@@ -10,6 +10,7 @@ using namespace pst;
 
 int main(int argc, char const *argv[])
 {
+  system("clear");
   lock lks;
   if(lks.get_state())
   {
