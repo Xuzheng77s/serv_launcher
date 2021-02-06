@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef LAUNCHER_DEFS_H
 #define LAUNCHER_DEFS_H
 
