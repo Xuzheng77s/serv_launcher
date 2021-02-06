@@ -1,7 +1,7 @@
 #ifndef LAUNCHER_DEFS_H
 #define LAUNCHER_DEFS_H
 
-#define LAUNCHER_VERSION 0.1
+#define LAUNCHER_VERSION 0.35
 #define EXIT_SUCCESFUL 0
 #define EXIT_ERROR 1
 #define EXIT_UNEXPECTED -1
@@ -9,14 +9,21 @@
 #define PST_END }
 
 #include <iostream>
+#include <sys/time.h>
+#include <unistd.h>
 using namespace std;
 
 PST_BEGIN
+  void title()
+  {
+    time_t now=time(0);
+    tm *ntime=localtime(&now);
+    cout<<"["<<ntime->tm_hour<<":"<<ntime->tm_min<<":"<<ntime->tm_sec<<" "<<"LOCK]: ";
+  }
   void cutline()
   {
-    cout << "-------------------------------------" << endl;
+    cout << "--------------------------------------------------------------------------" << endl;
   }
-
   int start_server(const char* script_src)
   {
     int exit_code=system(script_src);
