@@ -13,46 +13,51 @@
 #include <sys/stat.h>
 using namespace std;
 
-struct lock
-{
-    bool get_state()
+PST_BEGIN
+    struct lock
     {
-        ifstream check("./.guard.lock");
-        ifstream lk("./.guard.lock",ios::in|ios::binary);
-        if(!check.is_open())
+        bool get_state()
         {
-            pst::title();
-            cout<<"第一次运行服务器!祝服主好运!"<<endl;
-            ofstream cf("./.guard.lock");
-            cf.close();
+            ifstream check("./.guard.lock");
+            ifstream lk("./.guard.lock",ios::in|ios::binary);
+            if(!check.is_open())
+            {
+                pst::title("LOCK");
+                cout<<"第一次运行服务器!祝服主好运!"<<endl;
+                ofstream cf("./.guard.lock");
+                cf.close();
+                check.close();
+                get_state();
+            }
             check.close();
-            get_state();
+            pid_t* s=new pid_t();
+            lk.read(reinterpret_cast<char*>(s),sizeof(pid_t));
+            string dir="/proc/"+to_string(*s)+"/io";
+            ifstream ext(dir.c_str());
+            lk.close();
+            delete s;
+            s=nullptr;
+            if(!ext.is_open())
+            {
+                ext.close();
+                return false;
+            }
+            else
+            {
+                ext.close();
+                return true;
+            }
         }
-        check.close();
-        pid_t* s=new pid_t();
-        lk.read(reinterpret_cast<char*>(s),sizeof(pid_t));
-        string dir="/proc/"+to_string(*s)+"/io";
-        ifstream ext(dir.c_str());
-        lk.close();
-        if(!ext.is_open())
+        void locks()
         {
-            ext.close();
-            return false;
+            ofstream lk("./.guard.lock",ios::out|ios::binary);
+            chmod("./.guard.lock",444);
+            pid_t* d=new pid_t(getpid());
+            const char* s=reinterpret_cast<char*>(d);
+            lk.write(s,sizeof(pid_t));
+            lk.close();
+            delete d;
+            d=nullptr;
         }
-        else
-        {
-            ext.close();
-            return true;
-        }
-    }
-    void locks()
-    {
-        ofstream lk("./.guard.lock",ios::out|ios::binary);
-        chmod("./.guard.lock",444);
-        pid_t* d=new pid_t(getpid());
-        const char* s=reinterpret_cast<char*>(d);
-        lk.write(s,sizeof(pid_t));
-        lk.close();
-        delete d;
-    }
-};
+    };
+PST_END

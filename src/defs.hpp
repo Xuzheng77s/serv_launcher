@@ -11,16 +11,17 @@
 #define PST_END }
 
 #include <iostream>
+#include <string>
 #include <sys/time.h>
 #include <unistd.h>
 using namespace std;
 
 PST_BEGIN
-  void title()
+  void title(string name)
   {
     time_t now=time(0);
     tm *ntime=localtime(&now);
-    cout<<"["<<ntime->tm_hour<<":"<<ntime->tm_min<<":"<<ntime->tm_sec<<" "<<"LOCK]: ";
+    cout<<"["<<ntime->tm_hour<<":"<<ntime->tm_min<<":"<<ntime->tm_sec<<" "<<name<<"]: ";
   }
   void cutline()
   {

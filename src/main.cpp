@@ -3,6 +3,7 @@
 #include <cassert>
 #include "lock.hpp"
 #include "defs.hpp"
+#include "backup.hpp"
 #include <sys/stat.h>
 using namespace std;
 using namespace pst;
@@ -12,7 +13,7 @@ int main(int argc, char const *argv[])
   lock lks;
   if(lks.get_state())
   {
-    title();
+    title("LOCK");
     cout<<"另一个服务器正在运行中..."<<endl;
     return EXIT_UNEXPECTED;
   }
@@ -27,10 +28,10 @@ int main(int argc, char const *argv[])
   switch (choose)
   {
     case 0:
-    title();
+    title("LOCK");
     cout<<"Locking..."<<endl;
     lks.locks();
-    title();
+    title("LOCK");
     cout<<"Locked"<<endl;
     start_server(src);
     break;
@@ -39,7 +40,9 @@ int main(int argc, char const *argv[])
     return EXIT_SUCCESFUL;
     break;
 
-    default:
-    return EXIT_FAILURE;
+    case 2:
+    title("BACKUP");
+    cout<<"Backup-ing"<<endl;
+    backups();
   }
 }
