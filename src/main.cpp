@@ -16,15 +16,17 @@ int main(int argc, char const *argv[])
     cout<<"另一个服务器正在运行中..."<<endl;
     return EXIT_UNEXPECTED;
   }
-  cout<<"欢迎来到服务器启动器 版本v"<<LAUNCHER_VERSION<<endl;
-  cutline();
   int choose;
   const char* src="./start.sh";
-  cout<<"请选择要做的事情:(1)启动服务器,(2)退出,(3)备份,(4)回滚纠错"<<endl;
+  cout<<"MCLake Version "<<LAUNCHER_VERSION<<endl;
+  cout<<"菜单:"<<endl;
+  cout<<"[0] 启动服务器"<<endl;
+  cout<<"[1] 退出"<<endl;
+  cout<<"[2] 备份"<<endl;
   cin>>choose;
   switch (choose)
   {
-    case 1:
+    case 0:
     title();
     cout<<"Locking..."<<endl;
     lks.locks();
@@ -33,7 +35,7 @@ int main(int argc, char const *argv[])
     start_server(src);
     break;
 
-    case 2:
+    case 1:
     return EXIT_SUCCESFUL;
     break;
 
